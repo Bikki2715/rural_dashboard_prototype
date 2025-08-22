@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rural Development Dashboard</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body{font-family:Arial, sans-serif; background:#f4f7fa; margin:20px;}
+    h2{text-align:center;}
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+    .card{background:white; padding:15px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1);}
+    .full{grid-column:span 2;}
+    .card h3{text-align:center; margin-bottom:10px;}
+    #area{height:500px;}
+  </style>
+</head>
+<body>
+
+  <h2>🌱 Rural Development Dashboard</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>🌾 Agriculture</h3>
+      <div id="agriculture"></div>
+    </div>
+
+    <div class="card">
+      <h3>🎓 Education</h3>
+      <div id="education"></div>
+    </div>
+
+    <div class="card">
+      <h3>🏗 Infrastructure</h3>
+      <div id="infrastructure"></div>
+    </div>
+
+    <div class="card">
+      <h3>🏥 Health</h3>
+      <div id="health"></div>
+    </div>
+
+    <div class="card full">
+      <h3>🗺️ Area (Location wise Development)</h3>
+      <div id="area"></div>
+    </div>
+  </div>
+
+  <script>
+    // Dummy Data
+    const years = ['2018','2019','2020','2021','2022','2023','2024'];
+
+    // Agriculture
+    Plotly.newPlot('agriculture',[{
+      x: years, y:[200,250,270,300,330,360,390],
+      mode:'lines+markers', type:'scatter'
+    }],{title:'Crop Production (tons)', margin:{t:40}});
+
+    // Education
+    Plotly.newPlot('education',[{
+      x:['North','South','East','West'], y:[75,68,80,60],
+      type:'bar'
+    }],{title:'Literacy Rate (%)', yaxis:{range:[0,100]}});
+
+    // Infrastructure
+    Plotly.newPlot('infrastructure',[{
+      labels:['Roads','Schools','Water','Electricity'],
+      values:[40,20,25,15], type:'pie'
+    }],{title:'Infrastructure Share'});
+
+    // Health
+    Plotly.newPlot('health',[{
+      x: years, y:[50,60,72,85,95,110,125],
+      mode:'lines+markers', type:'scatter'
+    }],{title:'Health Centers Added'});
+
+    // Area (Location Bubble Map)
+    const areaData = [{
+      type:'scattergeo',
+      mode:'markers+text',
+      lat:[28.6,12.9,22.6,19.1],
+      lon:[77.2,77.6,88.4,72.9],
+      text:['North','South','East','West'],
+      textposition:'top center',
+      marker:{
+        size:[20,18,22,15],
+        color:['green','blue','orange','red'],
+        line:{width:1,color:'black'}
+      }
+    }];
+
+    const layoutMap = {
+      title:'Location-wise Development Index',
+      geo:{scope:'asia', projection:{type:'mercator'}, showland:true}
+    };
+
+    Plotly.newPlot('area', areaData, layoutMap);
+  </script>
+
+</body>
+</html>
+
