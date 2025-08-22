@@ -14,3 +14,7 @@ This is a simple prototype dashboard built using **HTML + Plotly.js** for visual
 ## 🚀 How to Use
 1. Open `index.html` in any modern browser (Chrome, Edge, Firefox).  
 2. Or view it live via **GitHub Pages**:  
+
+## 📌 Notes
+- Data used here is **dummy data**, only for demonstration.  
+- Can be extended with real datasets for deeper insights.
